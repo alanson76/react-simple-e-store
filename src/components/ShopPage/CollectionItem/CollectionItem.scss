@@ -1,0 +1,41 @@
+.collection-item {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  align-items: center;
+
+  .image {
+    width: 100%;
+    height: 90%;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 5px;
+  }
+
+  .collection-footer {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+
+    .name {
+      margin-bottom: 15px;
+      align-self: flex-start;
+      align-content: flex-start;
+      padding-left: 2px;
+    }
+
+    .spacer {
+      flex-grow: 1;
+      background-color: blue;
+    }
+
+    .price {
+      align-self: flex-start;
+      padding-right: 2px;
+    }
+  }
+}
