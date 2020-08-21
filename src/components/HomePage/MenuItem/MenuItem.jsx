@@ -2,7 +2,7 @@ import React from 'react';
 
 import './MenuItem.scss';
 
-const MenuItem = ({title, imageUrl, size}) => {
+const MenuItem = ({title, imageUrl, size, linkUrl}) => {
   return (
     <div className={`menu-item ${size}`}>
       <div
@@ -11,7 +11,7 @@ const MenuItem = ({title, imageUrl, size}) => {
       />
       <div className='content'>
         <h1 className='title'>{title}</h1>
-        <span className='subtitle'>Show Now</span>
+        <span className='subtitle'>Shop Now</span>
       </div>
     </div>
   );
