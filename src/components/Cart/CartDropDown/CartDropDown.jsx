@@ -1,38 +1,50 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import {withRouter} from 'react-router-dom';
 
 import './CartDropDown.scss';
 
 import CustomButton from '../../common/CustomButton/CustomButton';
-import {removeItem} from '../../../redux/cart/cartActions';
+import {toggleCartHidden} from '../../../redux/cart/cartActions';
 import CartItem from '../CartItem/CartItem';
+import {selectCartItems} from '../../../redux/cart/cart.selectors';
 
-const CartDropDown = ({cartItems, removeItem}) => {
+const CartDropDown = ({cartItems, history, dispatch}) => {
   return (
     <div className='cart-dropdown'>
       <div className='cart-items'>
         <ul>
-          {cartItems.map((cartItem) => (
-            <CartItem key={cartItem.id} item={cartItem} />
-          ))}
+          {cartItems.length ? (
+            cartItems.map((cartItem) => (
+              <CartItem key={cartItem.id} item={cartItem} />
+            ))
+          ) : (
+            <span className='empty-message'>Your cart is empty</span>
+          )}
         </ul>
       </div>
 
-      <CustomButton>GO TO CHECKOUT</CustomButton>
+      <CustomButton
+        onClick={() => {
+          history.push('/checkout');
+          dispatch(toggleCartHidden());
+        }}
+      >
+        GO TO CHECKOUT
+      </CustomButton>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cartItems: state.cart.cartItems
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     cartItems: selectCartItems(state)
+//   };
+// };
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeItem: (id) => dispatch(removeItem(id))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartDropDown);
+//if there no mapDispatchToProps, connect gives dispatch function as props as default
+export default withRouter(connect(mapStateToProps)(CartDropDown));

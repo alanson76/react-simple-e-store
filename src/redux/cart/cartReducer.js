@@ -1,6 +1,6 @@
 import * as actions from './cartActionTypes';
 
-import {addItemToCart} from './cart.util';
+import {addItemToCart} from './cart.utils';
 
 const INITIAL_STATE = {
   hidden: true,
